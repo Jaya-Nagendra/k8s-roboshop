@@ -2,27 +2,28 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: shipping
+  name: frontend
   namespace: roboshop
   labels:
     project: roboshop
-    tier: backend
-    component: shipping
+    tier: frontend
+    component: frontend
 data: 
-  CART_ENDPOINT: "cart:8080"
-  DB_HOST: "mysql"
+  MONGO: "true" 
+  MONGO_URL: "mongodb://mongodb:27017/frontend"
+ 
   
 
 apiVersion: v1
 kind: Deployment
 metadata:
-  name: shipping
+  name: frontend
   namespace: roboshop
   # these are replicaset labels
   labels:
     project: roboshop
     tier: backend
-    component: shipping
+    component: frontend
 
   spec:
     replicas: 1
@@ -31,7 +32,7 @@ metadata:
       matchLabels:
       project: roboshop
       tier: backend
-      component: shipping  
+      component: frontend  
 
   # the below are pod definition, pod is subset of replicaset
     template:
@@ -39,62 +40,57 @@ metadata:
         labels:
           project: roboshop
           tier: backend
-          component: shipping
+          component: frontend
       spec:
         containers:
-        - name: shipping
-          image: nagendra2244/shipping:1.0.0
+        - name: frontend
+          image: nagendra2244/frontend:1.0.0
           imagePullPolicy: Always # safe to pull everytime, there may be images with same version rebuilt and pushed.
           resources:
             requests:
-              cpu: "200m"
-              memory: "256Mi"
+              cpu: "100m"
+              memory: "128Mi"
             limits:
-              cpu: "200m"
-              memory: "256Mi"
+              cpu: "100m"
+              memory: "128Mi"
           readinessProbe: 
             httpGet:
               # path: /health
               # port: 8080
             tcpSocket:
-              port: 8080  
+              port: 80
             failureThreshold: 2
             peroidSecond: 10
-            initialDelaySeconds: 15
-          startupProbe:
-            httpGet:
-              path: /health
-              port: 8080
-            failureThreshold: 20
-            periodSeconds: 10  
+            initialDelaySeconds: 15 
           livenessProbe:
             httpGet:
-              path: /health
-              port: 8080
+              path: /
+              port: 80
             failureThreshold: 2
             periodSeconds: 10
 
 
           envFrom:
           - configMapRef:
-            name: shipping
+            name: frontend
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: shipping
+  name: frontend
   namespace: roboshop
   labels:
     project: roboshop
     tier: backend
-    component: shipping
+    component: frontend
 spec:
+  type: LoadBalancer
   selector:
     # labels are used as selectors
     project: roboshop
     tier: backend
-    component: shipping
+    component: frontend
   ports:
   - protocol: TCP
-    port: 8080 # servie port
-    targetPort: 8080 # container port
+    port: 80 # servie port
+    targetPort: 80 # container port
