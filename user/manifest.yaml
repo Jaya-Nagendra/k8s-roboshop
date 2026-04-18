@@ -73,7 +73,7 @@ metadata:
           envFrom:
           - configMapRef:
             name: user
-
+---
 apiVersion: v1
 kind: Service
 metadata:
