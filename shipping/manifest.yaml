@@ -56,13 +56,15 @@ spec:
             path: /health
             port: 8080
           failureThreshold: 20
-          periodSeconds: 10  
+          periodSeconds: 20 
+          initialDelaySeconds: 30 
         livenessProbe:
           httpGet:
             path: /health
             port: 8080
           failureThreshold: 2
           periodSeconds: 10
+          initialDelaySeconds: 60
         envFrom:
         - configMapRef:
             name: shipping
