@@ -114,7 +114,7 @@ spec:
           name: frontend-nginx
       containers:
       - name: frontend
-        image: nagendra2244/frontend:1.0.0
+        image: nagendra2244/frontend:1.2.0
         imagePullPolicy: Always
         resources:
           requests:

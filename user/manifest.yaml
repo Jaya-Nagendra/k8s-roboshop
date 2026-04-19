@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: user
-        image: nagendra2244/user:1.0.0
+        image: nagendra2244/user:1.2.0
         imagePullPolicy: Always
         resources:
           requests:

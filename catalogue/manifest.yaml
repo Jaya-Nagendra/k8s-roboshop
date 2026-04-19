@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
       - name: catalogue
-        image: nagendra2244/catalogue:1.0.0
+        image: nagendra2244/catalogue:1.2.0
         imagePullPolicy: Always
         resources:
           requests:

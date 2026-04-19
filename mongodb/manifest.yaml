@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: mongodb
-        image: nagendra2244/mongodb:1.0.0
+        image: nagendra2244/mongodb:1.2.0
 ---
 apiVersion: v1
 kind: Service

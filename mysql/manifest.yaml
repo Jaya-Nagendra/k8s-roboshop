@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: nagendra2244/mysql:1.0.0   
+        image: nagendra2244/mysql:1.2.0   
         ports:
         - containerPort: 3306
 ---

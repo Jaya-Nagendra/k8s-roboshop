@@ -37,7 +37,7 @@ spec:   # <-- spec must be aligned under metadata, not indented inside
     spec:
       containers:
       - name: cart
-        image: nagendra2244/cart:1.0.0
+        image: nagendra2244/cart:1.2.0
         imagePullPolicy: Always
         resources:
           requests:
