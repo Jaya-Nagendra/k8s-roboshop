@@ -58,6 +58,7 @@ spec:   # <-- spec must be aligned under metadata, not indented inside
             port: 8080
           failureThreshold: 2
           periodSeconds: 10
+          initialDelaySeconds: 60
         envFrom:
         - configMapRef:
             name: cart
