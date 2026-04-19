@@ -48,9 +48,9 @@ spec:
         readinessProbe: 
           tcpSocket:
             port: 8080  
-          failureThreshold: 2
+          failureThreshold: 5
           periodSeconds: 10
-          initialDelaySeconds: 15
+          initialDelaySeconds: 120
         startupProbe:
           httpGet:
             path: /health
